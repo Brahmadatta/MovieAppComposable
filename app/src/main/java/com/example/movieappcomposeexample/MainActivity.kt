@@ -102,10 +102,12 @@ fun MainContent(
                     Box(modifier = Modifier
                         .padding(15.dp)
                         .clickable {
-                            Log.e("dataa", "MainContent: $it")
+                            //Log.e("dataa", "MainContent: $it")
                         },
                             contentAlignment = Alignment.Center) {
-                            MovieRow(movie = it)
+                            MovieRow(movie = it) { movie ->
+                                Log.d("TAG", "MainContent: $movie")
+                            }
                             //Text(text = it)
                         }
                         }
@@ -116,11 +118,14 @@ fun MainContent(
 }
 
 @Composable
-fun MovieRow(movie : String){
+fun MovieRow(movie : String,onItemClick : (String) -> Unit = {}){
     
     Card(modifier = Modifier
         .fillMaxWidth()
-        .height(130.dp),
+        .height(130.dp)
+        .clickable {
+            onItemClick(movie)
+        },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
     elevation = 5.dp) {
         Row(modifier = Modifier.padding(5.dp),
