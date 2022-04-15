@@ -1,7 +1,10 @@
 package com.example.movieappcomposeexample.screens.details
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -13,9 +16,17 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.rememberImagePainter
+import com.example.movieappcomposeexample.model.Movie
+import com.example.movieappcomposeexample.model.getMovies
+import com.example.movieappcomposeexample.widgets.MovieRow
 
 @Composable
-fun DetailsScreen(navController: NavController, movieData: String?){
+fun DetailsScreen(navController: NavController, movieId: String?){
+
+    val newMovieList = getMovies().filter { movie ->
+        movie.id == movieId
+    }
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Color.LightGray,
@@ -36,15 +47,33 @@ fun DetailsScreen(navController: NavController, movieData: String?){
             .fillMaxHeight()) {
             Column(modifier = Modifier.padding(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center) {
-                Text(text = movieData.toString(),
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = FontStyle.Normal,
-                    style = MaterialTheme.typography.h3
-                )
+                verticalArrangement = Arrangement.Top) {
+                MovieRow(movie = newMovieList.first())
+                Spacer(modifier = Modifier.height(8.dp))
+                Divider()
+                Text(text = "Movie Images")
+                HorizontalScrollableImageView(newMovieList)
             }
         }
     }
 
 
+}
+
+@Composable
+private fun HorizontalScrollableImageView(newMovieList: List<Movie>) {
+    LazyRow {
+        items(newMovieList[0].images) { image ->
+            Card(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(240.dp), elevation = 5.dp
+            ) {
+                Image(
+                    painter = rememberImagePainter(data = image),
+                    contentDescription = "Movie Poster"
+                )
+            }
+        }
+    }
 }
