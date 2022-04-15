@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.movieappcomposeexample.navigation.MovieNavigation
 import com.example.movieappcomposeexample.ui.theme.MovieAppComposeExampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             MyApp {
-                MainContent()
+                MovieNavigation()
             }
         }
 
@@ -40,82 +41,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(content : @Composable () -> Unit){
     MovieAppComposeExampleTheme {
-        //content()
-        Scaffold(topBar = {
-            TopAppBar(backgroundColor = Color.Magenta,
-            elevation = 5.dp) {
-                Text(text = "Movies")
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { Log.d("TAG", "MyApp: Clicked") },
-            backgroundColor = Color.Blue) {
-                    Text(text = "Heyy", color = Color.White)
-            }
-        }) {
-            content()
-        }
+        content()
+
     }
 }
 
-@Composable
-fun MainContent(
-    movieList: List<String> = listOf(
-        "Avengers End Game",
-        "Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF","Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF","Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF","Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari",
-        "Hera Pheri"
-    )
-){
-    Column(modifier = Modifier
-        .padding(5.dp)
-        .fillMaxWidth()) {
-        LazyColumn(){
-            items(items = movieList){
-                Surface(modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxWidth(),
-                ) {
-                    Box(modifier = Modifier
-                        .padding(15.dp)
-                        .clickable {
-                            //Log.e("dataa", "MainContent: $it")
-                        },
-                            contentAlignment = Alignment.Center) {
-                            MovieRow(movie = it) { movie ->
-                                Log.d("TAG", "MainContent: $movie")
-                            }
-                            //Text(text = it)
-                        }
-                        }
 
-            }
-        }
-    }
-}
 
 @Composable
 fun MovieRow(movie : String,onItemClick : (String) -> Unit = {}){
@@ -153,6 +84,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     MyApp {
-        MainContent()
+        MovieNavigation()
     }
 }
