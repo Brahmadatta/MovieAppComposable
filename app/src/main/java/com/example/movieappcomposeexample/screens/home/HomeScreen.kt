@@ -1,6 +1,5 @@
 package com.example.movieappcomposeexample.screens
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,8 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.movieappcomposeexample.MovieRow
+import com.example.movieappcomposeexample.model.Movie
+import com.example.movieappcomposeexample.model.getMovies
 import com.example.movieappcomposeexample.navigation.MovieScreens
+import com.example.movieappcomposeexample.widgets.MovieRow
 
 @Composable
 fun HomeScreen(navController: NavController){
@@ -43,35 +44,7 @@ fun HomeScreen(navController: NavController){
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<String> = listOf(
-        "Avengers End Game",
-        "Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF","Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF","Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari","Avatar",
-        "BirdBox",
-        "KGF","Malleshwari","Avatar",
-        "BirdBox",
-        "KGF",
-        "Malleshwari",
-        "Hera Pheri"
-    )
+    movieList: List<Movie> = getMovies()
 ){
     Column(modifier = Modifier
         .padding(5.dp)
