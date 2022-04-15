@@ -1,6 +1,7 @@
 package com.example.movieappcomposeexample.screens.details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -25,6 +26,12 @@ fun DetailsScreen(navController: NavController, movieData: String?){
             fontStyle = FontStyle.Normal,
                 style = MaterialTheme.typography.h3
             )
+            Spacer(modifier = Modifier.height(10.dp))
+            Button(onClick = {
+                navController.popBackStack()
+            }) {
+                Text(text = "Go Back")
+            }
         }
     }
 }
